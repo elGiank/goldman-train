@@ -1,0 +1,301 @@
+{
+	"info": {
+		"_postman_id": "187c8f8a-ae17-4444-a1b1-6caa07b9eb16",
+		"name": "Rick y Morty API",
+		"description": "Url base para la API **GraphQL**:\nhttps://rickandmortyapi.com/graphql\n\nUrl base para la API **REST**:\nhttps://rickandmortyapi.com/api\n\nEn el caso de la API **REST**, deberás añadirla como variable global o de entorno con el nombre `restBaseUrl`.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23050485"
+	},
+	"item": [
+		{
+			"name": "REST",
+			"item": [
+				{
+					"name": "Episodios",
+					"item": [
+						{
+							"name": "Obtener todos los episodios",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"El código de estado es 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"La lista de episodios no está vacía\", function () {",
+											"    var response = pm.response.json();",
+											"",
+											"    pm.expect(response.info.count).to.be.greaterThan(0);",
+											"    pm.expect(response.results.length).to.be.greaterThan(0);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{restBaseUrl}}/episode",
+									"host": [
+										"{{restBaseUrl}}"
+									],
+									"path": [
+										"episode"
+									]
+								},
+								"description": "Más información:\nhttps://rickandmortyapi.com/documentation/#get-all-episodes"
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener un único episodio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"El código de estado es 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"El episodio obtenido es el mismo que se especificó en la petición\", function () {\r",
+											"    pm.expect(pm.response.json().id).to.eql(parseInt(pm.environment.get('id')));\r",
+											"}); \r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{restBaseUrl}}/episode/{{id}}",
+									"host": [
+										"{{restBaseUrl}}"
+									],
+									"path": [
+										"episode",
+										"{{id}}"
+									]
+								},
+								"description": "Más información:\nhttps://rickandmortyapi.com/documentation/#get-a-single-episode"
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener todos los lugares",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"El código de estado es 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"La lista de lugares no está vacía\", function () {",
+											"    var response = pm.response.json();",
+											"",
+											"    pm.expect(response.info.count).to.be.greaterThan(0);",
+											"    pm.expect(response.results.length).to.be.greaterThan(0);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{restBaseUrl}}/location",
+									"host": [
+										"{{restBaseUrl}}"
+									],
+									"path": [
+										"location"
+									]
+								},
+								"description": "Más información:\nhttps://rickandmortyapi.com/documentation/#get-all-locations"
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener un único lugar",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"El código de estado es 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"El lugar obtenido es el mismo que se especificó en la petición\", function () {\r",
+											"    pm.expect(pm.response.json().id).to.eql(parseInt(pm.environment.get('id')));\r",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{authToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{restBaseUrl}}/location/{{id}}",
+									"host": [
+										"{{restBaseUrl}}"
+									],
+									"path": [
+										"location",
+										"{{id}}"
+									]
+								},
+								"description": "Más información:\nhttps://rickandmortyapi.com/documentation/#get-a-single-location"
+							},
+							"response": []
+						}
+					],
+					"description": "Peticiones para obtener información sobre los episodios.\n\nMás información:\nhttps://rickandmortyapi.com/documentation/#episode"
+				},
+				{
+					"name": "Lugares",
+					"item": [],
+					"description": "Peticiones para obtener información sobre los lugares de la serie.\n\nMás información:\nhttps://rickandmortyapi.com/documentation/#location"
+				},
+				{
+					"name": "Personajes",
+					"item": [
+						{
+							"name": "Obtener un único personaje",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"El código de estado es 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"El personaje obtenido es el mismo que se especificó en la petición\", function () {",
+											"    pm.expect(pm.response.json().id).to.eql(parseInt(pm.environment.get('id')));",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{restBaseUrl}}/character/{{id}}",
+									"host": [
+										"{{restBaseUrl}}"
+									],
+									"path": [
+										"character",
+										"{{id}}"
+									]
+								},
+								"description": "Más información:\nhttps://rickandmortyapi.com/documentation/#get-a-single-character"
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener todos los personajes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"El código de estado es 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"La lista de personajes no está vacía\", function () {",
+											"    var response = pm.response.json();",
+											"",
+											"    pm.expect(response.info.count).to.be.greaterThan(0);",
+											"    pm.expect(response.results.length).to.be.greaterThan(0);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{restBaseUrl}}/character",
+									"host": [
+										"{{restBaseUrl}}"
+									],
+									"path": [
+										"character"
+									]
+								},
+								"description": "Más información:\nhttps://rickandmortyapi.com/documentation/#get-all-characters"
+							},
+							"response": []
+						}
+					],
+					"description": "Peticiones para obtener información sobre los personajes de la serie.\n\nMás información:\nhttps://rickandmortyapi.com/documentation/#character"
+				}
+			],
+			"description": "La **URL base** (https://rickandmortyapi.com/api) contiene información sobre todos los recursos de la API que están disponibles. Todas las peticiones usan el método `GET` y funcionan sobre `https`. Todas las respuestas devuelven los datos en `json`.\n\nActualmente hay tres recursos disponibles:\n* **Character**: usado para obtener todos los personajes.\n* **Location**: usado para obtener todos los lugares.\n* **Episode**: usado para obtener todos los episodios.\n\nLa API paginará automáticamente las respuestas. Recibirás hasta 20 documentos por página. Cada recurso contiene un objeto `info` con información sobre la respuesta.\n\nPuedes acceder a diferentes páginas con el parámetro `page`. Si éste no está especificado en la petición, se mostrará la primera página. Por ejemplo, para acceder a la página 2, se debe añadir `?page=2` al final de la URL.\n\nMás información: https://rickandmortyapi.com/documentation/#rest"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
